@@ -19,6 +19,7 @@ const adminRoutes = require('./routes/admin.routes');
 const cartRoutes = require('./routes/cart.routes');
 const ordersRoutes = require('./routes/orders.routes');
 const paymentRoutes = require('./routes/payment.routes');
+const { connectToDatabase } = require('./data/database');
 
 const app = express();
 
@@ -54,14 +55,7 @@ app.use(errorHandlerMiddleware);
 
 async function startServer() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-    });
-    console.log('Connected to MongoDB');
-    
+    await connectToDatabase();
     const port = process.env.PORT || 3000;
     app.listen(port, function() {
       console.log('Server is running on port ' + port);

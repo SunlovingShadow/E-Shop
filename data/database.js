@@ -14,7 +14,7 @@ async function connectToDatabase() {
         console.log('Connected to the database successfully');
     } catch (error) {
         console.error('Failed to connect to the database', error);
-        process.exit(1);
+        process.exit(1); // Exit the process with an error code
     }
 }
 
@@ -26,6 +26,6 @@ function getDb() {
 }
 
 module.exports = {
-    connectToDatabase: connectToDatabase,
-    getDb: getDb
+    connectToDatabase,
+    getDb
 };
