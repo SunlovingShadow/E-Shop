@@ -6,8 +6,16 @@ function createSessionStore() {
 
   const store = new MongoDBStore({
     uri: process.env.MONGODB_URI,
-    databaseName: 'E-shop',
-    collection: 'sessions'
+    databaseName: 'eshop',
+    collection: 'sessions',
+    ssl: true,
+    sslValidate: false,
+    tlsAllowInvalidCertificates: true
+  });
+
+  // Handle connection errors
+  store.on('error', function(error) {
+    console.error('Session store error:', error);
   });
 
   return store;
@@ -20,10 +28,11 @@ function createSessionConfig() {
     saveUninitialized: false,
     store: createSessionStore(),
     cookie: {
-      maxAge: 2 * 24 * 60 * 60 * 1000,  // 2 days
+      maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax'
-    }
+    },
+    proxy: true // trust the reverse proxy when setting secure cookies (via the "X-Forwarded-Proto" header).
   };
 }
 

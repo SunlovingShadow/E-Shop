@@ -55,6 +55,9 @@ app.use(errorHandlerMiddleware);
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  ssl: true,
+  sslValidate: false,
+  tlsAllowInvalidCertificates: true
 })
 .then(() => {
   console.log('Connected to MongoDB');
