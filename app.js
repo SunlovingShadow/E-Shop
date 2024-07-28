@@ -2,9 +2,9 @@ const path = require('path');
 const express = require('express');
 const csrf = require('csurf');
 const expressSession = require('express-session');
+const mongoose = require('mongoose');
 
 const createSessionConfig = require('./config/session');
-const db = require('./data/database');
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const checkAuthStatusMiddleware = require('./middlewares/check-auth');
@@ -16,7 +16,7 @@ const authRoutes = require('./routes/auth.routes');
 const productsRoutes = require('./routes/products.routes');
 const baseRoutes = require('./routes/base.routes');
 const adminRoutes = require('./routes/admin.routes');
-const cartRoutes = require('./routes/cart.routes'); // Updated to handle /cart/success within cart.routes
+const cartRoutes = require('./routes/cart.routes');
 const ordersRoutes = require('./routes/orders.routes');
 const paymentRoutes = require('./routes/payment.routes');
 
@@ -44,7 +44,7 @@ app.use(checkAuthStatusMiddleware);
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
-app.use('/cart', cartRoutes); // Updated to include the new cart routes
+app.use('/cart', cartRoutes);
 app.use('/orders', protectRoutesMiddleware, ordersRoutes);
 app.use('/admin', protectRoutesMiddleware, adminRoutes);
 app.use('/payment', paymentRoutes);
@@ -52,13 +52,17 @@ app.use('/payment', paymentRoutes);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-db.connectToDatabase()
-  .then(function () {
-    app.listen(process.env.PORT || 3000, function() {
-      console.log('Server is running on port ' + (process.env.PORT || 3000));
-    });
-  })
-  .catch(function (error) {
-    console.log('Failed to connect to the database!');
-    console.log(error);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Connected to MongoDB');
+  app.listen(process.env.PORT || 3000, function() {
+    console.log('Server is running on port ' + (process.env.PORT || 3000));
   });
+})
+.catch((error) => {
+  console.log('Failed to connect to the database!');
+  console.log(error);
+});

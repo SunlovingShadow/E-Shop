@@ -5,7 +5,7 @@ function createSessionStore() {
   const MongoDBStore = mongoDbStore(expressSession);
 
   const store = new MongoDBStore({
-    uri: 'mongodb://localhost:27017',
+    uri: process.env.MONGODB_URI,
     databaseName: 'E-shop',
     collection: 'sessions'
   });
@@ -15,12 +15,14 @@ function createSessionStore() {
 
 function createSessionConfig() {
   return {
-    secret: 'super-secret',
+    secret: process.env.SESSION_SECRET || 'super-secret',
     resave: false,
     saveUninitialized: false,
     store: createSessionStore(),
     cookie: {
-      maxAge: 2 * 24 * 60 * 60 * 1000  //2 days ...some secs
+      maxAge: 2 * 24 * 60 * 60 * 1000,  // 2 days
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax'
     }
   };
 }
