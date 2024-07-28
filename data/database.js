@@ -4,17 +4,17 @@ const MongoClient = mongodb.MongoClient;
 let database;
 
 async function connectToDatabase() {
-    const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/E-shop';
+    const mongoUrl = process.env.MONGODB_URI;
     try {
         const client = await MongoClient.connect(mongoUrl, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
         database = client.db();
-        console.log('Connected to MongoDB successfully');
+        console.log('Connected to the database successfully');
     } catch (error) {
-        console.error('Failed to connect to MongoDB:', error);
-        throw error; // Re-throw the error for handling in app.js
+        console.error('Failed to connect to the database', error);
+        process.exit(1);
     }
 }
 

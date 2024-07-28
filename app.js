@@ -52,19 +52,25 @@ app.use('/payment', paymentRoutes);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000,
-  socketTimeoutMS: 45000,
-})
-.then(() => {
-  console.log('Connected to MongoDB');
-  app.listen(process.env.PORT || 3000, function() {
-    console.log('Server is running on port ' + (process.env.PORT || 3000));
-  });
-})
-.catch((error) => {
-  console.log('Failed to connect to the database!');
-  console.log(error);
-});
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
+    console.log('Connected to MongoDB');
+    
+    const port = process.env.PORT || 3000;
+    app.listen(port, function() {
+      console.log('Server is running on port ' + port);
+    });
+  } catch (error) {
+    console.log('Failed to connect to the database!');
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+startServer();
