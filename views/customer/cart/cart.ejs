@@ -1,0 +1,132 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Your Cart' }) %>
+    <link rel="stylesheet" href="/styles/cart.css">
+    <script src="/scripts/cart-item-management.js" defer></script>
+    </head>
+
+    <body>
+        <%- include('../../shared/includes/header') %>
+            <main>
+                <h1>Your Cart</h1>
+                <% if (locals.cart && locals.cart.items && locals.cart.items.length> 0) { %>
+                    <ul id="cart-items">
+                        <% for (const cartItem of locals.cart.items) { %>
+                            <li>
+                                <%- include('includes/cart-item', { item: cartItem }) %>
+                            </li>
+                            <% } %>
+                    </ul>
+                    <div id="cart-total">
+                        <p>Total: $<span id="cart-total-price">
+                                <%= locals.cart.totalPrice.toFixed(2) %>
+                            </span></p>
+
+                        <% if (locals.isAuth && locals.cart.totalPrice> 0) { %>
+                            <div id="paypal-button-container"></div>
+                            <% } else if (!locals.isAuth) { %>
+                                <p id="cart-total-fallback">Please log in to proceed with your purchase.</p>
+                                <% } %>
+                    </div>
+                    <% } else { %>
+                        <p>Your cart is empty. Add some items to get started!</p>
+                        <% } %>
+            </main>
+            <%- include('../../shared/includes/footer') %>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const paypalContainer = document.getElementById('paypal-button-container');
+        const clientId = 'AUqrNtTocvjV7j2u9Trny79i2Id6J4bL5xeAVw8JIB22Oopnxrjr7h5o5JOCKbg5xsPhmKjxShxEh_Xe';
+
+        function loadPayPalScript() {
+            return new Promise((resolve, reject) => {
+                if (window.paypal) {
+                    resolve();
+                } else {
+                    const script = document.createElement('script');
+                    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
+                    script.async = true;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.body.appendChild(script);
+                }
+            });
+        }
+
+        if (paypalContainer) {
+            loadPayPalScript().then(initPayPalButton).catch((error) => {
+                console.error('Failed to load PayPal script:', error);
+                paypalContainer.innerHTML = '<p>Payment system unavailable. Please try again later.</p>';
+            });
+        }
+    });
+
+    function initPayPalButton() {
+        const paypalContainer = document.getElementById('paypal-button-container');
+
+        if (!paypalContainer) return;
+
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'blue',
+                shape: 'rect',
+                label: 'paypal'
+            },
+            createOrder: function (data, actions) {
+                const totalPriceElement = document.getElementById('cart-total-price');
+                const totalPrice = parseFloat(totalPriceElement.textContent.trim()).toFixed(2);
+
+                if (isNaN(totalPrice) || totalPrice <= 0) {
+                    return Promise.reject(new Error('Invalid cart total'));
+                }
+
+                return fetch('/payment/create-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'CSRF-Token': '<%= locals.csrfToken %>'
+                    },
+                    body: JSON.stringify({
+                        amount: totalPrice
+                    })
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (orderData) {
+                    if (orderData.id) {
+                        return orderData.id;
+                    } else {
+                        throw new Error('Failed to create order');
+                    }
+                });
+            },
+            onApprove: function (data, actions) {
+                return fetch('/payment/capture-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'CSRF-Token': '<%= locals.csrfToken %>'
+                    },
+                    body: JSON.stringify({
+                        orderId: data.orderID
+                    })
+                }).then(function (res) {
+                    return res.json();
+                }).then(function (orderData) {
+                    if (orderData.capture && orderData.capture.id) {
+                        window.location.href = '/payment/success?transaction_id=' + orderData.capture.id;
+                    } else {
+                        throw new Error('Failed to capture order');
+                    }
+                });
+            },
+            onError: function (err) {
+                console.error('PayPal error:', err);
+                paypalContainer.innerHTML = '<p>An error occurred. Please try again later.</p>';
+            }
+        }).render('#paypal-button-container').catch(error => {
+            console.error('Failed to render PayPal buttons:', error);
+            paypalContainer.innerHTML = '<p>Failed to load payment options. Please try again later.</p>';
+        });
+    }
+</script>
+               
+    </body>

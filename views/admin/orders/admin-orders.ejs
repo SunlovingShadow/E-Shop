@@ -1,0 +1,54 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Manage All Customer Orders' }) %>
+    <link rel="stylesheet" href="/styles/orders.css">
+    </head>
+
+    <body>
+        <%- include('../../shared/includes/header') %>
+            <main>
+                <h1>Manage All Customer Orders</h1>
+                <% if (orders && orders.length> 0) { %>
+                    <ul class="orders-list">
+                        <% for (const order of orders) { %>
+                            <li class="order-item">
+                                <h2>Order #<%= order.id %>
+                                </h2>
+                                <p><strong>Date:</strong>
+                                    <%= order.formattedDate %>
+                                </p>
+                                <p><strong>Customer:</strong>
+                                    <%= order.userData.name %> (<%= order.userData.email %>)
+                                </p>
+                                <p><strong>Total:</strong> $<%= order.productData.totalPrice.toFixed(2) %>
+                                </p>
+                                <h3>Order Items:</h3>
+                                <ul class="order-items">
+                                    <% for (const item of order.productData.items) { %>
+                                        <li>
+                                            <%= item.product.title %> - Quantity: <%= item.quantity %>,
+                                                    Price: $<%= item.totalPrice.toFixed(2) %>
+                                        </li>
+                                        <% } %>
+                                </ul>
+                                <form class="order-actions" data-orderid="<%= order.id %>">
+                                    <select name="status">
+                                        <option value="pending" <%=order.status==='pending' ? 'selected' : '' %>>Pending
+                                        </option>
+                                        <option value="fulfilled" <%=order.status==='fulfilled' ? 'selected' : '' %>
+                                            >Fulfilled</option>
+                                        <option value="cancelled" <%=order.status==='cancelled' ? 'selected' : '' %>
+                                            >Cancelled</option>
+                                    </select>
+                                    <button class="btn">Update Status</button>
+                                </form>
+                            </li>
+                            <% } %>
+                    </ul>
+                    <% } else { %>
+                        <p>No orders found.</p>
+                        <% } %>
+            </main>
+            <%- include('../../shared/includes/footer') %>
+                <script src="/scripts/order-management.js"></script>
+    </body>
+
+    </html>

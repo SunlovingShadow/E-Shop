@@ -1,0 +1,53 @@
+<%- include('../../shared/includes/head', { pageTitle: 'All Products' }) %>
+    <link rel="stylesheet" href="/styles/products.css">
+    <script src="/scripts/product-management.js" defer></script>
+    </head>
+
+    <body>
+        <%- include('../../shared/includes/header') %>
+            <main>
+                <h1 class="products-title">Products</h1>
+                <section>
+                    <form id="filter-form" action="/products" method="GET">
+                        <input type="text" name="search" placeholder="Search products..."
+                            value="<%= typeof search !== 'undefined' ? search : '' %>">
+                        <select name="sort">
+                            <option value="">Sort by</option>
+                            <option value="price-desc" <%=typeof sort !=='undefined' && sort==='price-desc' ? 'selected'
+                                : '' %>>Price: High to Low</option>
+                            <option value="price-asc" <%=typeof sort !=='undefined' && sort==='price-asc' ? 'selected'
+                                : '' %>>Price: Low to High</option>
+                        </select>
+                        <button type="submit">Apply</button>
+                        <button type="button" onclick="resetFilters()">Reset</button>
+                    </form>
+                </section>
+                <% if (user && user.isAdmin) { %>
+                    <section>
+                        <h1>Product Administration</h1>
+                        <h2>Manage Products</h2>
+                        <p>
+                            <a href="/admin/products/new" class="btn">Add Product</a>
+                        </p>
+                    </section>
+                    <% } %>
+                        <section>
+                            <ul id="products-grid">
+                                <% for (const product of products) { %>
+                                    <li>
+                                        <%- include('../../shared/includes/product-item', { product: product }) %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                        </section>
+            </main>
+            <%- include('../../shared/includes/footer') %>
+                <script>
+                    function resetFilters() {
+                        document.getElementById('filter-form').reset();
+                        window.location.href = '/products';
+                    }
+                </script>
+    </body>
+
+    </html>

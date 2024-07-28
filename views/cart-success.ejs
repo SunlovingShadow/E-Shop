@@ -1,0 +1,22 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Payment Result' }) %>
+    </head>
+
+    <body>
+        <%- include('../../shared/includes/header') %>
+            <main>
+                <% if (locals.error) { %>
+                    <h1>Payment Processing Error</h1>
+                    <p>We're sorry, but an error occurred while processing your payment: <%= locals.error %>
+                    </p>
+                    <p>Please contact our support team for assistance.</p>
+                    <% } else { %>
+                        <h1>Payment Successful!</h1>
+                        <p>Thank you for your purchase. Your transaction ID is: <%= transactionId %>
+                        </p>
+                        <p>Your cart has been cleared. <a href="/products">Continue shopping</a></p>
+                        <% } %>
+            </main>
+            <%- include('../../shared/includes/footer') %>
+    </body>
+
+    </html>
