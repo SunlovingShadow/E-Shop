@@ -1,5 +1,6 @@
 <article class="product-item">
-    <img src="/products/assets/images/<%= product.image %>" alt="<%= product.title %>" />
+    <img src="<%= product.image || '/path/to/fallback-image.jpg' %>" alt="<%= product.title %>"
+        onerror="this.src='/path/to/fallback-image.jpg';" />
     <div class="product-item-content">
         <h2>
             <%= product.title %>
