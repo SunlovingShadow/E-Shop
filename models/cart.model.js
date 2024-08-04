@@ -13,7 +13,12 @@ class Cart {
       this.items[cartItemIndex].totalPrice += product.price;
     } else {
       this.items.push({
-        product: product,
+        product: {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product.image, // This should be the Cloudinary URL
+        },
         quantity: 1,
         totalPrice: product.price
       });
@@ -55,7 +60,12 @@ class Cart {
       if (item.product) {
         const product = products.find(p => p.id === item.product.id);
         if (product) {
-          item.product = product;
+          item.product = {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image, // This should be the Cloudinary URL
+          };
           item.totalPrice = item.quantity * product.price;
         } else {
           console.error(`Product with id ${item.product.id} not found`);
@@ -67,6 +77,10 @@ class Cart {
 
     this.totalPrice = this.items.reduce((total, item) => total + item.totalPrice, 0);
     console.log("Cart after updating prices:", this);
+  }
+
+  getProductIds() {
+    return this.items.map(item => item.product.id);
   }
 }
 
