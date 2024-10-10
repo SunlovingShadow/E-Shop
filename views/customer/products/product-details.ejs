@@ -4,94 +4,35 @@
 <head>
     <%- include('../../shared/includes/head', { pageTitle: product.title }) %>
         <link rel="stylesheet" href="/styles/products.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-papX2+AG8OF0Fqk5AWqgEfQ6XY/BhUbvV0tNj0XmV/HV1IrIhHRw2W6cAKuxAl/lfVJoVjc6EAYbxa1XwYSeXg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="/scripts/cart-management.js" defer></script>
 </head>
 
 <body>
     <%- include('../../shared/includes/header') %>
-        <main class="product-details-container">
-            <div class="product-gallery">
-                <div class="main-image">
-                    <img src="<%= product.image || '/images/fallback-image.jpg' %>" alt="<%= product.title %>"
-                        onerror="this.src='/images/fallback-image.jpg';">
-                </div>
-                <% /* If you have multiple images, you can loop through them here */ %>
-                    <% if (product.images && product.images.length> 1) { %>
-                        <div class="thumbnail-images">
-                            <% product.images.forEach((img, index)=> { %>
-                                <img src="<%= img %>" alt="<%= product.title %> Thumbnail <%= index + 1 %>"
-                                    onerror="this.src='/images/fallback-image.jpg';">
-                                <% }) %>
-                        </div>
-                        <% } %>
-            </div>
-            <div class="product-info">
-                <h1 class="product-title">
-                    <%= product.title %>
-                </h1>
-                <div class="product-price-rating">
-                    <p class="product-price">$<%= product.price.toFixed(2) %>
+        <main id="product-details">
+            <header>
+                <img src="<%= product.image || '/path/to/fallback-image.jpg' %>" alt="<%= product.title %>"
+                    onerror="this.src='/path/to/fallback-image.jpg';">
+                <div id="product-info">
+                    <h1>
+                        <%= product.title %>
+                    </h1>
+                    <p>$<%= product.price %>
                     </p>
-                    <% /* Example: Display average rating if available */ %>
-                        <% if (product.averageRating) { %>
-                            <div class="product-rating">
-                                <% for(let i=1; i <=5; i++) { %>
-                                    <% if(i <=Math.round(product.averageRating)) { %>
-                                        <i class="fas fa-star"></i>
-                                        <% } else { %>
-                                            <i class="far fa-star"></i>
-                                            <% } %>
-                                                <% } %>
-                                                    <span>(<%= product.averageRating.toFixed(1) %>)</span>
-                            </div>
-                            <% } %>
+                    <button class="btn" data-productid="<%= product.id %>" data-csrf="<%= locals.csrfToken %>">
+                        Add to Cart
+                    </button>
                 </div>
-                <p class="product-description">
-                    <%= product.description %>
-                </p>
-                <% /* Add any additional product details or features here */ %>
-                    <div class="product-actions">
-                        <button class="btn add-to-cart-btn" data-productid="<%= product.id %>"
-                            data-csrf="<%= locals.csrfToken %>">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
-                        <% /* Optional: Wishlist button */ %>
-                            <button class="btn wishlist-btn" data-productid="<%= product.id %>"
-                                data-csrf="<%= locals.csrfToken %>">
-                                <i class="fas fa-heart"></i> Add to Wishlist
-                            </button>
-                    </div>
-                    <% /* Optional: Display stock status */ %>
-                        <% if (product.stock !==undefined) { %>
-                            <p class="stock-status">
-                                <% if (product.stock> 0) { %>
-                                    <span class="in-stock">In Stock</span>
-                                    <% } else { %>
-                                        <span class="out-of-stock">Out of Stock</span>
-                                        <% } %>
-                            </p>
-                            <% } %>
-            </div>
+            </header>
+            <p id="product-description">
+                <%= product.description %>
+            </p>
         </main>
         <%- include('../../shared/includes/footer') %>
 
             <script>
-                // Optional: Add interactivity for thumbnail clicks to change the main image
-                document.addEventListener('DOMContentLoaded', function () {
-                    const thumbnails = document.querySelectorAll('.thumbnail-images img');
-                    const mainImage = document.querySelector('.main-image img');
-
-                    thumbnails.forEach(thumbnail => {
-                        thumbnail.addEventListener('click', function () {
-                            mainImage.src = this.src;
-                            thumbnails.forEach(img => img.classList.remove('active'));
-                            this.classList.add('active');
-                        });
-                    });
-                });
+                // Log product details to console for debugging
+             console.log('Product details:', JSON.parse('<%- JSON.stringify(product) %>'));
             </script>
 </body>
 
