@@ -17,7 +17,7 @@ class Cart {
           id: product.id,
           title: product.title,
           price: product.price,
-          image: product.image, // This should be the Cloudinary URL
+          image: product.image, 
         },
         quantity: 1,
         totalPrice: product.price

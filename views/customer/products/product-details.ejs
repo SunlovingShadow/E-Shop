@@ -1,36 +1,39 @@
-<%- include('../../shared/includes/head', { pageTitle: product.title }) %>
-    <link rel="stylesheet" href="/styles/products.css">
-    <script src="/scripts/cart-management.js" defer></script>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
 
-    <body>
-        <%- include('../../shared/includes/header') %>
-            <main id="product-details">
-                <header>
-                    <img src="<%= product.image || '/path/to/fallback-image.jpg' %>" alt="<%= product.title %>"
-                        onerror="this.src='/path/to/fallback-image.jpg';">
-                    <div id="product-info">
-                        <h1>
-                            <%= product.title %>
-                        </h1>
-                        <p>$<%= product.price %>
-                        </p>
-                        <button class="btn" data-productid="<%= product.id %>" data-csrf="<%= locals.csrfToken %>">
-                            Add to Cart
-                        </button>
-                    </div>
-                </header>
+<head>
+    <%- include('../../shared/includes/head', { pageTitle: product.title }) %>
+        <link rel="stylesheet" href="/styles/products.css">
+        <script src="/scripts/cart-management.js" defer></script>
+</head>
 
-                <p id="product-description">
-                    <%= product.description %>
-                </p>
-            </main>
-            <%- include('../../shared/includes/footer') %>
+<body>
+    <%- include('../../shared/includes/header') %>
+        <main id="product-details">
+            <header>
+                <img src="<%= product.image || '/path/to/fallback-image.jpg' %>" alt="<%= product.title %>"
+                    onerror="this.src='/path/to/fallback-image.jpg';">
+                <div id="product-info">
+                    <h1>
+                        <%= product.title %>
+                    </h1>
+                    <p>$<%= product.price %>
+                    </p>
+                    <button class="btn" data-productid="<%= product.id %>" data-csrf="<%= locals.csrfToken %>">
+                        Add to Cart
+                    </button>
+                </div>
+            </header>
+            <p id="product-description">
+                <%= product.description %>
+            </p>
+        </main>
+        <%- include('../../shared/includes/footer') %>
 
-                <script>
-                    // Log product details to console for debugging
-                    console.log('Product details:', <% - JSON.stringify(product) %>);
-                </script>
-    </body>
+            <script>
+                // Log product details to console for debugging
+             console.log('Product details:', JSON.parse('<%- JSON.stringify(product) %>'));
+            </script>
+</body>
 
-    </html>
+</html>
