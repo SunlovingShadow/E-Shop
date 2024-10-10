@@ -23,6 +23,9 @@ const { connectToDatabase } = require('./data/database');
 
 const app = express();
 
+// Define appName globally
+app.locals.appName = 'E-Shop'; // Replace 'E-Shop' with your desired application name
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
