@@ -1,16 +1,10 @@
+<!-- /views/customer/auth/login.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <%- include('../../shared/includes/head', { pageTitle: 'Login' }) %>
-        <link rel="stylesheet" href="/styles/forms.css">
+    <%- include('../../shared/includes/head', { pageTitle: 'Login - ' + appName }) %>
         <link rel="stylesheet" href="/styles/auth.css">
-        <!-- Google Fonts for Enhanced Typography -->
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-        <!-- Font Awesome for Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-p1NkxU9iFl0G5VrO8E7Y9iPqSmIKSfYv59G6hCXYKJbB9P8LlyjLnc/yFOci8QZtZqURTt0Yf0Y+XohWbU0Vmg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -21,102 +15,50 @@
                     <img src="/images/login-illustration.svg" alt="Login Illustration">
                 </div>
                 <div class="auth-form">
-                    <h1>Welcome Back!</h1>
-                    <p>Please login to your account to continue.</p>
-
+                    <h2>Login to <%= appName %>
+                    </h2>
                     <% if (inputData.errorMessage) { %>
-                        <section class="alert">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <div>
-                                <h2>Invalid Credentials</h2>
-                                <p>
-                                    <%= inputData.errorMessage %>
-                                </p>
-                            </div>
-                        </section>
+                        <div class="error-message">
+                            <p>
+                                <%= inputData.errorMessage %>
+                            </p>
+                        </div>
                         <% } %>
-
                             <form action="/login" method="POST">
-                                <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
-
                                 <div class="form-group">
-                                    <label for="email">
-                                        <i class="fas fa-envelope"></i>
-                                        E-Mail
-                                    </label>
-                                    <input type="email" id="email" name="email" value="<%= inputData.email %>"
-                                        placeholder="Enter your email" required>
+                                    <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                                    <input type="email" id="email" name="email" required
+                                        value="<%= inputData.email || '' %>">
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="password">
-                                        <i class="fas fa-lock"></i>
-                                        Password
-                                    </label>
-                                    <input type="password" id="password" name="password"
-                                        placeholder="Enter your password" required>
-                                    <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+                                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                                    <input type="password" id="password" name="password" required>
+                                    <span class="toggle-password"><i class="fas fa-eye"></i></span>
                                 </div>
-
                                 <div class="form-options">
                                     <div class="remember-me">
-                                        <input type="checkbox" id="remember" name="remember">
+                                        <input type="checkbox" id="remember" name="remember" <%=inputData.remember
+                                            ? 'checked' : '' %>>
                                         <label for="remember">Remember Me</label>
                                     </div>
                                     <a href="/forgot-password">Forgot Password?</a>
                                 </div>
-
-                                <button class="btn btn-primary" type="submit">
-                                    <span class="btn-text">Login</span>
-                                    <span class="spinner" style="display: none;">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                    </span>
+                                <button type="submit" class="btn-primary">
+                                    Login
+                                    <% if (inputData.isLoading) { %>
+                                        <span class="spinner"></span>
+                                        <% } %>
                                 </button>
                             </form>
-
-                            <div class="social-login">
-                                <p>Or login with:</p>
-                                <a href="/auth/google" class="social-btn google"><i class="fab fa-google"></i>
-                                    Google</a>
-                                <a href="/auth/facebook" class="social-btn facebook"><i class="fab fa-facebook-f"></i>
-                                    Facebook</a>
+                            <div class="switch-form">
+                                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
                             </div>
-
-                            <p class="switch-form">Don't have an account? <a href="/signup">Create a new user</a></p>
                 </div>
             </div>
         </main>
         <%- include('../../shared/includes/footer') %>
-
-            <!-- JavaScript for Interactive Features -->
-            <script>
-                // Toggle Password Visibility
-                function togglePasswordVisibility() {
-                    const passwordInput = document.getElementById('password');
-                    const toggleIcon = document.querySelector('.toggle-password');
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        toggleIcon.classList.remove('fa-eye');
-                        toggleIcon.classList.add('fa-eye-slash');
-                    } else {
-                        passwordInput.type = 'password';
-                        toggleIcon.classList.remove('fa-eye-slash');
-                        toggleIcon.classList.add('fa-eye');
-                    }
-                }
-
-                // Show Loading Spinner on Form Submit
-                const form = document.querySelector('form');
-                const btn = document.querySelector('.btn');
-                const btnText = document.querySelector('.btn-text');
-                const spinner = document.querySelector('.spinner');
-
-                form.addEventListener('submit', function () {
-                    btnText.style.display = 'none';
-                    spinner.style.display = 'inline-block';
-                    btn.disabled = true;
-                });
-            </script>
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <script src="/scripts/auth.js"></script>
 </body>
 
 </html>

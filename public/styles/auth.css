@@ -1,134 +1,80 @@
-/* auth.css */
-
-/* Global Typography */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--color-blue-50);
-    color: var(--color-blue-900);
-    margin: 0;
-}
+/* /public/styles/auth.css */
 
 .auth-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
-    padding: var(--space-8) 0;
+    padding: 2rem 0;
 }
 
 .auth-wrapper {
     display: flex;
-    flex-direction: column;
-    background-color: var(--color-white);
-    box-shadow: var(--shadow-medium);
-    border-radius: var(--border-radius-medium);
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     overflow: hidden;
     max-width: 900px;
     width: 100%;
 }
 
-@media (min-width: 768px) {
-    .auth-wrapper {
-        flex-direction: row;
-    }
-}
-
 .auth-image {
     flex: 1;
-    background-color: var(--color-blue-500);
+    background-color: #3498db;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--space-8);
 }
 
 .auth-image img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
-    border-radius: var(--border-radius-medium);
 }
 
 .auth-form {
-    flex: 1;
-    padding: var(--space-8);
+    flex: 1.2;
+    padding: 2rem;
 }
 
-.auth-form h1 {
-    text-align: center;
-    color: var(--color-blue-500);
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: var(--space-4);
-}
-
-.auth-form p {
-    text-align: center;
-    margin-bottom: var(--space-6);
-    color: var(--color-blue-700);
-}
-
-.alert {
-    display: flex;
-    align-items: center;
-    background-color: var(--color-error-100);
-    color: var(--color-error-500);
-    padding: var(--space-4);
-    border-radius: var(--border-radius-small);
-    margin-bottom: var(--space-4);
-}
-
-.alert i {
-    margin-right: var(--space-2);
-    font-size: 1.5em;
+.auth-form h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
 }
 
 .form-group {
+    margin-bottom: 1rem;
     position: relative;
-    margin-bottom: var(--space-4);
 }
 
 .form-group label {
     display: block;
-    margin-bottom: var(--space-2);
-    font-weight: 700;
-    color: var(--color-blue-900);
-}
-
-.form-group i {
-    position: absolute;
-    top: 38px;
-    left: var(--space-2);
-    color: var(--color-blue-400);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 .form-group input {
     width: 100%;
-    padding: var(--space-2) var(--space-6) var(--space-2) var(--space-6);
-    border: 1px solid var(--color-blue-300);
-    border-radius: var(--border-radius-small);
-    box-shadow: var(--shadow-medium);
-    transition: border-color 0.3s ease;
+    padding: 0.8rem;
+    padding-right: 2.5rem;
+    /* Space for the toggle icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
 }
 
-.form-group input:focus {
-    border-color: var(--color-blue-500);
-    outline: none;
-}
-
-.toggle-password {
+.form-group .toggle-password {
     position: absolute;
     top: 50%;
-    right: var(--space-2);
+    right: 0.8rem;
     transform: translateY(-50%);
     cursor: pointer;
-    color: var(--color-blue-400);
+    color: #777;
 }
 
 .form-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-4);
+    margin-bottom: 1.5rem;
 }
 
 .remember-me {
@@ -137,100 +83,64 @@ body {
 }
 
 .remember-me input {
-    margin-right: var(--space-1);
+    margin-right: 0.5rem;
 }
 
-.form-options a {
-    color: var(--color-blue-500);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.form-options a:hover,
-.form-options a:active {
-    text-decoration: underline;
+.error-message {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 0.8rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
 }
 
 .btn-primary {
     width: 100%;
-    padding: var(--space-2) var(--space-6);
-    background-color: var(--color-blue-500);
-    color: var(--color-white);
+    padding: 0.8rem;
+    background-color: #2ecc71;
+    color: #fff;
     border: none;
-    border-radius: var(--border-radius-small);
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
     font-size: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover,
-.btn-primary:active {
-    background-color: var(--color-blue-700);
+.btn-primary:hover {
+    background-color: #27ae60;
 }
 
 .spinner {
-    margin-left: var(--space-2);
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 3px solid #fff;
+    border-top: 3px solid #2ecc71;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    animation: spin 1s linear infinite;
 }
 
-.social-login {
-    text-align: center;
-    margin: var(--space-6) 0;
-}
-
-.social-login p {
-    margin-bottom: var(--space-2);
-    color: var(--color-blue-700);
-}
-
-.social-btn {
-    display: inline-block;
-    margin: 0 var(--space-2);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--border-radius-small);
-    color: var(--color-white);
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-}
-
-.social-btn i {
-    margin-right: var(--space-1);
-}
-
-.social-btn.google {
-    background-color: #db4437;
-}
-
-.social-btn.google:hover {
-    background-color: #a33224;
-}
-
-.social-btn.facebook {
-    background-color: #3b5998;
-}
-
-.social-btn.facebook:hover {
-    background-color: #2d4373;
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .switch-form {
     text-align: center;
-    margin-top: var(--space-4);
-    color: var(--color-blue-700);
+    margin-top: 1rem;
+    color: #555;
 }
 
 .switch-form a {
-    color: var(--color-blue-500);
-    text-decoration: none;
-    font-weight: 600;
+    color: #2ecc71;
+    font-weight: 500;
 }
 
-.switch-form a:hover,
-.switch-form a:active {
+.switch-form a:hover {
     text-decoration: underline;
 }

@@ -1,3 +1,5 @@
+// app.js
+
 const path = require('path');
 const express = require('express');
 const csrf = require('csurf');
@@ -23,28 +25,35 @@ const { connectToDatabase } = require('./data/database');
 
 const app = express();
 
-// Define appName globally
-app.locals.appName = 'E-Shop'; // Replace 'E-Shop' with your desired application name
+// **1. Define appName Globally**
+app.locals.appName = 'Jovanni'; // Your shop's name
 
+// **2. Set EJS as the Templating Engine**
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use(express.static('public'));
-app.use('/products/assets/images', express.static('product-data/images'));
+// **3. Middleware to Serve Static Files**
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/products/assets/images', express.static(path.join(__dirname, 'product-data/images')));
+
+// **4. Middleware to Parse Incoming Requests**
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// **5. Session Configuration**
 const sessionConfig = createSessionConfig();
-
 app.use(expressSession(sessionConfig));
+
+// **6. CSRF Protection**
 app.use(csrf());
 
+// **7. Custom Middlewares**
 app.use(cartMiddleware);
 app.use(updateCartPricesMiddleware);
-
 app.use(addCsrfTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
 
+// **8. Define Routes**
 app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productsRoutes);
@@ -53,19 +62,20 @@ app.use('/orders', protectRoutesMiddleware, ordersRoutes);
 app.use('/admin', protectRoutesMiddleware, adminRoutes);
 app.use('/payment', paymentRoutes);
 
+// **9. Error Handling Middlewares**
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
+// **10. Start the Server After Connecting to the Database**
 async function startServer() {
   try {
     await connectToDatabase();
     const port = process.env.PORT || 3000;
-    app.listen(port, function() {
-      console.log('Server is running on port ' + port);
+    app.listen(port, () => {
+      console.log(`Jovanni server is running on port ${port}`);
     });
   } catch (error) {
-    console.log('Failed to connect to the database!');
-    console.log(error);
+    console.error('Failed to connect to the database!', error);
     process.exit(1);
   }
 }
