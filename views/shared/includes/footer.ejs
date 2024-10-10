@@ -3,9 +3,11 @@
     <style>
         /* Footer Styles */
         .footer {
-            background-color: #3b8ada;
-            color: #ecf0f1;
-            padding: 60px 15px 30px;
+            background-color: var(--color-blue-600);
+            /* Using CSS variable for background */
+            color: var(--color-white);
+            /* Using CSS variable for text */
+            padding: 3rem 1rem;
             width: 100%;
             box-sizing: border-box;
         }
@@ -16,6 +18,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            padding: 0 1rem;
         }
 
         .footer-section {
@@ -23,26 +26,31 @@
             min-width: 250px;
             margin-bottom: 30px;
             padding: 0 15px;
-            /* Added horizontal padding for spacing */
+            /* Consistent horizontal padding */
         }
 
         .footer-logo {
-            font-size: 28px;
+            font-size: 2rem;
+            /* Increased font size for prominence */
             font-weight: bold;
             margin-bottom: 20px;
-            color: #09399a;
+            color: var(--color-blue-800);
+            /* Using CSS variable for logo color */
         }
 
         .footer-section.about p {
             line-height: 1.6;
-            color: #000000;
+            color: var(--color-white);
+            /* Ensuring readability on dark background */
             margin-bottom: 20px;
         }
 
         .footer-section h3 {
-            font-size: 20px;
+            font-size: 1.25rem;
+            /* Adjusted font size */
             margin-bottom: 20px;
-            color: #ecf0f1;
+            color: var(--color-white);
+            /* Using CSS variable for headings */
         }
 
         .footer-section.links ul {
@@ -55,17 +63,20 @@
         }
 
         .footer-section.links ul li a {
-            color: #bdc3c7;
+            color: var(--color-blue-200);
+            /* Using CSS variable for link color */
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer-section.links ul li a:hover {
-            color: #1abc9c;
+            color: var(--color-blue-400);
+            /* Using CSS variable for hover state */
         }
 
         .contact-info {
-            color: #bdc3c7;
+            color: var(--color-blue-200);
+            /* Using CSS variable for contact text */
             line-height: 1.6;
         }
 
@@ -74,12 +85,14 @@
         }
 
         .contact-info a {
-            color: #bdc3c7;
+            color: var(--color-blue-200);
+            /* Using CSS variable for contact links */
             text-decoration: none;
         }
 
         .contact-info a:hover {
-            color: #1abc9c;
+            color: var(--color-blue-400);
+            /* Using CSS variable for hover state */
         }
 
         .socials {
@@ -88,22 +101,28 @@
         }
 
         .socials a {
-            color: #bdc3c7;
-            font-size: 20px;
+            color: var(--color-blue-200);
+            /* Using CSS variable for social icons */
+            font-size: 1.25rem;
+            /* Adjusted font size */
             margin-right: 15px;
             transition: color 0.3s ease;
         }
 
         .socials a:hover {
-            color: #1abc9c;
+            color: var(--color-blue-400);
+            /* Using CSS variable for hover state */
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 20px;
-            border-top: 1px solid #34495e;
-            font-size: 14px;
-            color: #7f8c8d;
+            border-top: 1px solid var(--color-blue-700);
+            /* Using CSS variable for border */
+            font-size: 0.875rem;
+            /* Adjusted font size */
+            color: var(--color-blue-300);
+            /* Using CSS variable for footer bottom text */
         }
 
         /* Responsive Design */
