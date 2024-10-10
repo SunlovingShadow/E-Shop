@@ -22,6 +22,8 @@
             flex: 1;
             min-width: 250px;
             margin-bottom: 30px;
+            padding: 0 15px;
+            /* Added horizontal padding for spacing */
         }
 
         .footer-logo {
@@ -62,35 +64,22 @@
             color: #1abc9c;
         }
 
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #34495e;
-            border-radius: 4px;
-            background-color: #34495e;
-            color: #ecf0f1;
+        .contact-info {
+            color: #bdc3c7;
+            line-height: 1.6;
         }
 
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: #7f8c8d;
+        .contact-info p {
+            margin-bottom: 10px;
         }
 
-        .contact-form button {
-            padding: 12px 20px;
-            background-color: #1abc9c;
-            border: none;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        .contact-info a {
+            color: #bdc3c7;
+            text-decoration: none;
         }
 
-        .contact-form button:hover {
-            background-color: #16a085;
+        .contact-info a:hover {
+            color: #1abc9c;
         }
 
         .socials {
@@ -127,6 +116,7 @@
 
             .footer-section {
                 margin-bottom: 40px;
+                padding: 0;
             }
         }
     </style>
@@ -168,15 +158,12 @@
             </ul>
         </div>
 
-        <!-- Contact Form Section -->
-        <div class="footer-section contact-form">
+        <!-- Contact Information Section -->
+        <div class="footer-section contact-info">
             <h3>Contact Us</h3>
-            <form action="/contact" method="POST">
-                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-                <textarea name="message" placeholder="Your Message" rows="4" required
-                    aria-label="Your Message"></textarea>
-                <button type="submit">Send Message</button>
-            </form>
+            <p><strong>Email:</strong> <a href="mailto:mukherjeesamadrita0@gmail.com">mukherjeesamadrita0@gmail.com</a>
+            </p>
+            <p><strong>Phone:</strong> <a href="tel:+918240755990">+91 8240755990</a></p>
         </div>
     </div>
 
