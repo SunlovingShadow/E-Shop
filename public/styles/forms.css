@@ -1,5 +1,3 @@
-/* forms.css */
-
 form hr {
     border-color: var(--color-blue-400);
     margin: var(--space-4);
@@ -9,7 +7,6 @@ label {
     color: var(--color-blue-900);
     display: block;
     margin-bottom: var(--space-2);
-    font-weight: 600;
 }
 
 input,
@@ -20,14 +17,6 @@ textarea {
     border: 1px solid var(--color-blue-300);
     width: 90%;
     box-shadow: var(--shadow-medium);
-    transition: border-color 0.3s ease;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: var(--color-blue-500);
-    outline: none;
 }
 
 #image-upload-control {
@@ -46,35 +35,4 @@ select:focus {
     object-fit: cover;
     border-radius: var(--border-radius-small);
     border: 1px solid var(--color-blue-300);
-}
-
-/* Additional Styles for Enhanced Forms */
-
-textarea {
-    resize: vertical;
-}
-
-input[type="checkbox"] {
-    margin-right: var(--space-1);
-}
-
-input[type="radio"] {
-    margin-right: var(--space-1);
-}
-
-select {
-    padding: var(--space-2);
-    border: 1px solid var(--color-blue-300);
-    border-radius: var(--border-radius-small);
-    background-color: var(--color-white);
-    box-shadow: var(--shadow-medium);
-}
-
-button {
-    cursor: pointer;
-}
-
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
 }
