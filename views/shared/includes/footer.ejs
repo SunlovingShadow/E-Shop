@@ -1,152 +1,13 @@
-<!-- /views/shared/includes/footer.ejs -->
+<!-- views/shared/includes/footer.ejs -->
 <footer class="footer">
-    <style>
-        /* Footer Styles */
-        .footer {
-            background-color: #1a1a1a;
-            color: #f2f2f2;
-            padding: 60px 15px 30px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-            margin-bottom: 30px;
-            padding: 0 20px;
-            /* Increased horizontal padding for better spacing */
-        }
-
-        .footer-logo {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #2d66c2;
-            /* Changed to a warmer accent color */
-        }
-
-        .footer-section.about p {
-            line-height: 1.6;
-            color: #cccccc;
-            margin-bottom: 20px;
-        }
-
-        .footer-section h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #f2f2f2;
-        }
-
-        .footer-section.links ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-section.links ul li {
-            margin-bottom: 12px;
-            /* Increased spacing between links */
-        }
-
-        .footer-section.links ul li a {
-            color: #cccccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section.links ul li a:hover {
-            color: #ff6f61;
-        }
-
-        .contact-info {
-            color: #cccccc;
-            line-height: 1.6;
-        }
-
-        .contact-info p {
-            margin-bottom: 10px;
-        }
-
-        .contact-info a {
-            color: #cccccc;
-            text-decoration: none;
-        }
-
-        .contact-info a:hover {
-            color: #ff6f61;
-        }
-
-        .socials {
-            display: flex;
-            margin-top: 20px;
-        }
-
-        .socials a {
-            color: #cccccc;
-            font-size: 20px;
-            margin-right: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .socials a:hover {
-            color: #ff6f61;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #333333;
-            font-size: 14px;
-            color: #999999;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .footer-container {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .footer-section {
-                margin-bottom: 40px;
-                padding: 0 15px;
-                /* Adjusted padding for mobile */
-            }
-        }
-    </style>
-
     <div class="footer-container">
-        <!-- About Section -->
-        <div class="footer-section about">
-            <h2 class="footer-logo">
-                <%= appName %>
-            </h2>
-            <p>
-                <%= appName %> is your trusted online store for the best products at the best prices. We are committed
-                    to providing high-quality products and exceptional customer service.
+        <!-- Brand Section -->
+        <div class="footer-section brand">
+            <h2 class="footer-logo">Jovanni</h2>
+            <p class="brand-description">
+                Jovanni is your trusted online store for the best products at the best prices.
+                We are committed to providing high-quality products and exceptional customer service.
             </p>
-            <div class="socials">
-                <!-- Social Media Icons -->
-                <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://twitter.com" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <!-- Add more social links as needed -->
-            </div>
         </div>
 
         <!-- Quick Links Section -->
@@ -161,17 +22,132 @@
             </ul>
         </div>
 
-        <!-- Contact Information Section -->
-        <div class="footer-section contact-info">
+        <!-- Contact Section -->
+        <div class="footer-section contact">
             <h3>Contact Us</h3>
-            <p><strong>Email:</strong> <a href="mailto:mukherjeesamadrita0@gmail.com">mukherjeesamadrita0@gmail.com</a>
-            </p>
-            <p><strong>Phone:</strong> <a href="tel:+918240755990">+91 8240755990</a></p>
+            <div class="contact-info">
+                <p>
+                    <strong>Email:</strong>
+                    <a href="mailto:mukherjeesamadrita0@gmail.com">mukherjeesamadrita0@gmail.com</a>
+                </p>
+                <p>
+                    <strong>Phone:</strong>
+                    <a href="tel:+918240755990">+91 8240755990</a>
+                </p>
+            </div>
         </div>
     </div>
 
     <div class="footer-bottom">
-        &copy; <%= new Date().getFullYear() %>
-            <%= appName %>. All rights reserved.
+        <p>&copy; <%= new Date().getFullYear() %> Jovanni. All rights reserved.</p>
     </div>
 </footer>
+
+<style>
+    .footer {
+        background-color: #1a1a1a;
+        color: #ffffff;
+        padding: 4rem 2rem 1rem;
+        margin-top: auto;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+    }
+
+    .footer-section {
+        padding: 0 1rem;
+    }
+
+    .footer-logo {
+        color: #3498db;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+
+    .brand-description {
+        color: #cccccc;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-section h3 {
+        color: #ffffff;
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+
+    .footer-section h3::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -0.5rem;
+        width: 50px;
+        height: 2px;
+        background-color: #3498db;
+    }
+
+    .footer-section.links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-section.links ul li {
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-section.links ul li a {
+        color: #cccccc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: inline-block;
+    }
+
+    .footer-section.links ul li a:hover {
+        color: #3498db;
+        transform: translateX(5px);
+    }
+
+    .contact-info p {
+        margin-bottom: 1rem;
+        color: #cccccc;
+    }
+
+    .contact-info a {
+        color: #cccccc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .contact-info a:hover {
+        color: #3498db;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #333333;
+        color: #888888;
+    }
+
+    @media (max-width: 768px) {
+        .footer {
+            padding: 3rem 1rem 1rem;
+        }
+
+        .footer-container {
+            gap: 2rem;
+        }
+
+        .footer-section {
+            padding: 0;
+        }
+    }
+</style>
