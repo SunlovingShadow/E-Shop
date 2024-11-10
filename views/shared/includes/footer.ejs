@@ -1,9 +1,9 @@
 <!-- views/shared/includes/footer.ejs -->
-<footer class="footer">
-    <div class="footer-container">
+<footer class="main-footer">
+    <div class="footer-content">
         <!-- Brand Section -->
-        <div class="footer-section brand">
-            <h2 class="footer-logo">Jovanni</h2>
+        <div class="footer-brand">
+            <h2 class="brand-name">Jovanni</h2>
             <p class="brand-description">
                 Jovanni is your trusted online store for the best products at the best prices.
                 We are committed to providing high-quality products and exceptional customer service.
@@ -11,9 +11,9 @@
         </div>
 
         <!-- Quick Links Section -->
-        <div class="footer-section links">
-            <h3>Quick Links</h3>
-            <ul>
+        <div class="footer-links">
+            <h3 class="footer-title">Quick Links</h3>
+            <ul class="footer-menu">
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/products">Products</a></li>
                 <li><a href="/contact">Contact</a></li>
@@ -23,17 +23,17 @@
         </div>
 
         <!-- Contact Section -->
-        <div class="footer-section contact">
-            <h3>Contact Us</h3>
-            <div class="contact-info">
-                <p>
-                    <strong>Email:</strong>
+        <div class="footer-contact">
+            <h3 class="footer-title">Contact Us</h3>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <span class="label">Email:</span>
                     <a href="mailto:mukherjeesamadrita0@gmail.com">mukherjeesamadrita0@gmail.com</a>
-                </p>
-                <p>
-                    <strong>Phone:</strong>
+                </div>
+                <div class="contact-item">
+                    <span class="label">Phone:</span>
                     <a href="tel:+918240755990">+91 8240755990</a>
-                </p>
+                </div>
             </div>
         </div>
     </div>
@@ -41,113 +41,168 @@
     <div class="footer-bottom">
         <p>&copy; <%= new Date().getFullYear() %> Jovanni. All rights reserved.</p>
     </div>
-</footer>
 
-<style>
-    .footer {
-        background-color: #1a1a1a;
-        color: #ffffff;
-        padding: 4rem 2rem 1rem;
-        margin-top: auto;
-    }
-
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 3rem;
-    }
-
-    .footer-section {
-        padding: 0 1rem;
-    }
-
-    .footer-logo {
-        color: #3498db;
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        font-weight: bold;
-    }
-
-    .brand-description {
-        color: #cccccc;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
-
-    .footer-section h3 {
-        color: #ffffff;
-        font-size: 1.25rem;
-        margin-bottom: 1.5rem;
-        position: relative;
-    }
-
-    .footer-section h3::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -0.5rem;
-        width: 50px;
-        height: 2px;
-        background-color: #3498db;
-    }
-
-    .footer-section.links ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .footer-section.links ul li {
-        margin-bottom: 0.75rem;
-    }
-
-    .footer-section.links ul li a {
-        color: #cccccc;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        display: inline-block;
-    }
-
-    .footer-section.links ul li a:hover {
-        color: #3498db;
-        transform: translateX(5px);
-    }
-
-    .contact-info p {
-        margin-bottom: 1rem;
-        color: #cccccc;
-    }
-
-    .contact-info a {
-        color: #cccccc;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .contact-info a:hover {
-        color: #3498db;
-    }
-
-    .footer-bottom {
-        text-align: center;
-        margin-top: 3rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid #333333;
-        color: #888888;
-    }
-
-    @media (max-width: 768px) {
-        .footer {
-            padding: 3rem 1rem 1rem;
+    <style>
+        .main-footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 4rem 0 1rem;
+            margin-top: auto;
+            font-family: 'Inter', sans-serif;
         }
 
-        .footer-container {
-            gap: 2rem;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
         }
 
-        .footer-section {
+        .brand-name {
+            color: #3498db;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-description {
+            color: #a0a0a0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            max-width: 90%;
+        }
+
+        .footer-title {
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: #3498db;
+            border-radius: 2px;
+        }
+
+        .footer-menu {
+            list-style: none;
             padding: 0;
+            margin: 0;
         }
-    }
-</style>
+
+        .footer-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-menu a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .footer-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3498db;
+            transition: width 0.3s ease;
+        }
+
+        .footer-menu a:hover {
+            color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .footer-menu a:hover::after {
+            width: 100%;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .contact-item .label {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .contact-item a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .contact-item a:hover {
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-brand {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-brand {
+                grid-column: span 1;
+            }
+
+            .brand-description {
+                max-width: 100%;
+            }
+
+            .main-footer {
+                padding: 3rem 0 1rem;
+            }
+        }
+    </style>
+</footer>
